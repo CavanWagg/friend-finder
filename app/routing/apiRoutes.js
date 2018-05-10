@@ -13,8 +13,18 @@ module.exports = function(app) {
     res.json(friends);
   });
 
-  // API POST Requests
-  
+  /* API POST Requests
+  the code handles when a user submits a form and submits data to the server.
+  When a user submits form data (a JSON object) the JSON is
+  pushed to the appropriate Javascript array
+  User fills out questions this data is then sent to the server
+  then the server saves the data to the tableData array)
+*/
+
+app.post("/api/friends", function(req, res) {
+  res.json(true);
+  // 
+})
 }
 
 
