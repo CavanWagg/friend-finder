@@ -4,7 +4,7 @@
 
 //DEPENDENCIES
 // include the path package to get the correct file for our html
-var path = requre("path");
+var path = require("path");
 
 // Routing 
 

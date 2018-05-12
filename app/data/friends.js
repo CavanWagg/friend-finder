@@ -2,7 +2,6 @@
 var friendsArray = [
   {
     "name":"Brenna Johnson",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
     "scores":[
         5,
         1,
@@ -18,7 +17,6 @@ var friendsArray = [
   },
   {
     "name":"Garrett Wagg",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
     "scores":[
         5,
         1,
@@ -34,7 +32,6 @@ var friendsArray = [
   },
   {
     "name":"Mike Krzesowiak",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
     "scores":[
         5,
         1,
@@ -50,7 +47,6 @@ var friendsArray = [
   },
   {
     "name":"Alainna Wagg",
-    "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
     "scores":[
         5,
         1,

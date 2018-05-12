@@ -43,8 +43,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -58,8 +58,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -73,8 +73,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -88,8 +88,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -103,8 +103,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -118,8 +118,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -133,8 +133,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -148,8 +148,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -163,8 +163,8 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <h3>
@@ -178,21 +178,44 @@
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5 (Strongly Agree)</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Strongly Agree)</option>
                   </select>
           </div>
           <button id="submit" type="submit" class="btn btn-primary submit btn-lg btn-block">Submit</button>
 
         </form>
+
+        <!-- Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Your Best Match</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h2 id="match-name"></h2>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
       </div>
 
     
 
 </body>
 <script>
-  // capture the form inputs
-  $("#submit").on("click",function(event) {
+  $(document).ready(function() {
+// capture the form inputs
+$("#submit").on("click",function(event) {
     event.preventDefault();
 
     // Form validation, user needs to have input a name
@@ -214,7 +237,7 @@
     if (validateForm()) {
       // Create an object for the user's data
       var newFriend = {
-        name: $("#name").val(),
+        name: $("#name").val().trim(),
         scores: [
           $("#q1").val(),
           $("#q2").val(),
@@ -232,11 +255,36 @@
       // AJAX post data to friends API
       $.post("/api/friends", newFriend,
       function(data) {
-        // Grab
-      }
-    )
+        Console.log(newFriend);
+        // Grab result from AJAX post so that the best match's name is displayed.
+        $("#match-name").text(data.name);
+         // Display modal with best match
+         $("#results-modal").modal("toggle");
+
+         // clear form after submission
+         $('#name').val("");
+         $('#q1').val("");
+          $('#q2').val("");
+          $('#q3').val("");
+          $('#q4').val("");
+          $('#q5').val("");
+          $('#q6').val("");
+          $('#q7').val("");
+          $('#q8').val("");
+          $('#q9').val("");
+          $('#q10').val("")
+      });
+    }else {
+      alert("You must enter a name and answer all 10 questions before submitting!");
     }
-  })
+  });
+  
+  
+
+
+
+})
+  
   
  
  
