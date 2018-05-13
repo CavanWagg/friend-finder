@@ -25,20 +25,20 @@ app.post("/api/friends", function(req, res) {
   const userInput = req.body;
   const userResponses = userInput.scores; 
 
-  const matchName = '';
-  const totalDifference = 10000;
+  let matchName = '';
+  let totalDifference = 10000;
  
 // Examine existing friends in the list
-for (var i = 0; i < friends.length; i++) {
+for (var i = 0; i < friendData.length; i++) {
   // compute differences for each question
   var diff = 0;
   for (var j = 0; j < userResponses.length; j++) {
-    diff += Math.abs(friends[i].scores[j] - userResponses[j]);
+    diff += Math.abs(friendData[i].scores[j] - userResponses[j]);
   }
   // If lower difference, record the match
   if (diff < totalDifference) {
     totalDifference = diff;
-    matchName = friends[i].name;
+    matchName = friendData[i].name;
   }
 }
 // Add new user

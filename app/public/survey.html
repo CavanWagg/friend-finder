@@ -157,8 +157,8 @@
             </h3>
         
               <div class="form-group col-md-4">
-                  <label for="q9">I avoid being the center of attention.</label>
-                  <select id="inputState" class="select">
+                  <label for="inputState">I avoid being the center of attention.</label>
+                  <select id="q9" class="select">
                     <option selected>Choose...</option>
                   <option value="1">1 (Strongly Disagree)</option>
                   <option value="2">2</option>
@@ -187,7 +187,7 @@
         </form>
 
         <!-- Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="results-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -236,28 +236,28 @@ $("#submit").on("click",function(event) {
     // If all required fields have been filled
     if (validateForm()) {
       // Create an object for the user's data
-      var newFriend = {
+      var userData = {
         name: $("#name").val().trim(),
         scores: [
-          $("#q1").val(),
-          $("#q2").val(),
-          $("#q3").val(),
-          $("#q4").val(),
-          $("#q5").val(),
-          $("#q6").val(),
-          $("#q7").val(),
-          $("#q8").val(),
-          $("#q9").val(),
-          $("#q10").val(),
+          $("#q1").val().trim(),
+          $("#q2").val().trim(),
+          $("#q3").val().trim(),
+          $("#q4").val().trim(),
+          $("#q5").val().trim(),
+          $("#q6").val().trim(),
+          $("#q7").val().trim(),
+          $("#q8").val().trim(),
+          $("#q9").val().trim(),
+          $("#q10").val().trim()
         ]
       };
 
       // AJAX post data to friends API
-      $.post("/api/friends", newFriend,
+      $.post("/api/friends", userData,
       function(data) {
-        Console.log(newFriend);
+        console.log(userData);
         // Grab result from AJAX post so that the best match's name is displayed.
-        $("#match-name").text(data.name);
+        $("#match-name").html(data.matchName);
          // Display modal with best match
          $("#results-modal").modal("toggle");
 
@@ -278,16 +278,9 @@ $("#submit").on("click",function(event) {
       alert("You must enter a name and answer all 10 questions before submitting!");
     }
   });
-  
-  
-
-
 
 })
   
-  
- 
- 
  </script>
   
 
