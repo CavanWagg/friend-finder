@@ -26,7 +26,9 @@ app.post("/api/friends", function(req, res) {
   const userResponses = userInput.scores; 
 
   let matchName = '';
-  let totalDifference = 10000;
+  let matchImage = '';
+  // Make initial value huge for comparison
+  let totalDifference = 500;
  
 // Examine existing friends in the list
 for (var i = 0; i < friendData.length; i++) {
@@ -39,13 +41,14 @@ for (var i = 0; i < friendData.length; i++) {
   if (diff < totalDifference) {
     totalDifference = diff;
     matchName = friendData[i].name;
+    matchImage = friendData[i].photo;
   }
 }
-// Add new user
+
 friendData.push(userInput);
 
 // Send response 
 
-res.json({status: 'OK', matchName: matchName});
+res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
 })
 };

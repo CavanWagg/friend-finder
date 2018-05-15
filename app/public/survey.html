@@ -198,6 +198,7 @@
                 </div>
                 <div class="modal-body">
                   <h2 id="match-name"></h2>
+                  <img id="userMatchImage" width="150">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -205,8 +206,6 @@
               </div>
             </div>
           </div>
-
-
       </div>
 
     
@@ -238,6 +237,7 @@ $("#submit").on("click",function(event) {
       // Create an object for the user's data
       var userData = {
         name: $("#name").val().trim(),
+        // photo: $('userPhoto').val().trim(),
         scores: [
           $("#q1").val().trim(),
           $("#q2").val().trim(),
@@ -251,28 +251,20 @@ $("#submit").on("click",function(event) {
           $("#q10").val().trim()
         ]
       };
-
+      
       // AJAX post data to friends API
       $.post("/api/friends", userData,
       function(data) {
         console.log(userData);
         // Grab result from AJAX post so that the best match's name is displayed.
         $("#match-name").html(data.matchName);
+        $('#userMatchImage').attr("src", data.matchImage);
+        
+        
          // Display modal with best match
          $("#results-modal").modal("toggle");
 
-         // clear form after submission
-         $('#name').val("");
-         $('#q1').val("");
-          $('#q2').val("");
-          $('#q3').val("");
-          $('#q4').val("");
-          $('#q5').val("");
-          $('#q6').val("");
-          $('#q7').val("");
-          $('#q8').val("");
-          $('#q9').val("");
-          $('#q10').val("")
+       
       });
     }else {
       alert("You must enter a name and answer all 10 questions before submitting!");
